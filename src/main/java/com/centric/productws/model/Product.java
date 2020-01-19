@@ -16,14 +16,6 @@ public class Product {
 
     }
 
-    public Product(String name, String description, String brand, List<String> tags, String category) {
-        this.name = name;
-        this.description = description;
-        this.brand = brand;
-        this.tags = tags;
-        this.category = category;
-    }
-
     public String getId() {
         return id;
     }
