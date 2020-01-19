@@ -1,4 +1,4 @@
-package com.centric.product;
+package com.centric.productws;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

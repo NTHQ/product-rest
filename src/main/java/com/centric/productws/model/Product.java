@@ -1,4 +1,4 @@
-package src.main.java.com.centric.productws.model;
+package com.centric.productws.model;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +11,18 @@ public class Product {
     private List<String> tags;
     private String category;
     private Date created_at;
+
+    public Product() {
+
+    }
+
+    public Product(String name, String description, String brand, List<String> tags, String category) {
+        this.name = name;
+        this.description = description;
+        this.brand = brand;
+        this.tags = tags;
+        this.category = category;
+    }
 
     public String getId() {
         return id;
