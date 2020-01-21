@@ -1,0 +1,25 @@
+1. Clone the repository
+    1.1 Open a terminal
+    1.2 Navigate to the directory where you wish to clone the repository to
+    1.3 Enter "git clone https://github.com/NTHQ/product-rest.git"
+
+2. Running the application
+    2.1 Open a terminal
+    2.2 Navigate to the directory where the repository was cloned
+    2.3 Enter "./mvnw spring-boot:run"
+
+3. Using the application
+    3.1 Open a browser
+    3.2 Get products by category
+        3.2.1 Enter the URL "http://localhost:8080/v1/products/findProductByCategory?category=apparel"
+        3.2.2 Check the output to find 2 records (Red Shirt and Blue Shirt"
+    3.3 Create a product
+        3.3.1 Open Postman
+        3.3.2 Enter the URL "localhost:8080/v1/products/createProduct"
+        3.3.3 In the Query Params section enter:
+            name=Green Shirt
+            description=Green Hugo Boss shirt
+            brand=Hugo Boss
+            tags="green,shirt"
+            category=apparel
+        3.3.4 Check the response to find the same information you entered
