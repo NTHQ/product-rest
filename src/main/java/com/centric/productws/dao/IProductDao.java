@@ -7,5 +7,5 @@ import java.util.List;
 public interface IProductDao<T> {
     List<T> getByField(String field, String value);
 
-    Product insert(String name, String description, String brand, String tags, String category);
+    Product insert(Product product);
 }
