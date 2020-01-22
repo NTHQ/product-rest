@@ -19,7 +19,8 @@ import java.util.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -93,25 +94,15 @@ class ProductRestApplicationTests {
         Date date = new Date();
         product.setCreated_at(date);
 
-        given(productController.createProduct(product.getName(), product.getDescription(), product.getBrand(), String.join(",", product.getTags()), product.getCategory())).willReturn(product);
+        given(productController.createProduct(product)).willReturn(product);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
         df.setTimeZone(TimeZone.getTimeZone("UTC"));
+        String requestBody = "{\"name\":\"Green Shirt\",\"description\":\"Green hugo boss shirt\",\"brand\":\"Hugo Boss\",\"tags\":[\"green\",\"shirt\",\"slim fit\"],\"category\":\"apparel\"}";
         mvc.perform(MockMvcRequestBuilders
                 .post("/v1/products/createProduct/")
-                .param("name", "Green Shirt")
-                .param("description", "Green Hugo Boss shirt")
-                .param("brand", "Hugo Boss")
-                .param("tags", "green,shirt")
-                .param("category", "apparel")
-                .accept(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody))
                 .andExpect(status().isOk())
-                .andExpect(content().json(
-                        "{\"id\":" + product.getId() + "," +
-                                "\"name\":\"" + product.getName() + "\"," +
-                                "\"description\":\"" + product.getDescription() + "\"," +
-                                "\"brand\":\"" + product.getBrand() + "\"," +
-                                "\"tags\":[" + String.join(",", product.getTags()) + "]," +
-                                "\"category\":\"" + product.getCategory() + "\"," +
-                                "\"created_at\":\"" + df.format(product.getCreated_at()) + "\"}"));
+                .andReturn();
     }
 }
